@@ -1,6 +1,5 @@
 package com.optus.optusappjson;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -22,8 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner mSpinner;
     private TextView mTextView;
+    private TextView mTransTitleView;
     private Button mButton;
     private int choosedItemIndex;
+// show err message
+    private TextView mInfoTextView;
 
     enum CurrentStatus{
         FETCHING_JSON,
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         mSpinner = (Spinner)this.findViewById(R.id.spinner);
         mButton = (Button)this.findViewById(R.id.button);
         mTextView = (TextView)this.findViewById(R.id.transportInfo);
-
+        mInfoTextView = (TextView)this.findViewById(R.id.errText);
+        mTransTitleView = (TextView)this.findViewById(R.id.transportTitle);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,22 +74,36 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(){
         switch(mStatus){
             case GET_JSON_SUCCESSFUL:
+                showTransUIElements();
                 updatePinner();
                 break;
             case  OTHER_ERROR:
-
+            case NETWORK_UNREACHABLE:
+                hidAllUIElements();
+                mInfoTextView.setVisibility(View.VISIBLE);
+                mInfoTextView.setText("Connection Error!");
                 break;
             case FETCHING_JSON:
                 hidAllUIElements();
+                mInfoTextView.setVisibility(View.VISIBLE);
+                mInfoTextView.setText("Connecting Service!");
                 break;
         }
+    }
 
+    private void showTransUIElements(){
+        mSpinner.setVisibility(View.VISIBLE);
+        mButton.setVisibility(View.VISIBLE);
+        mTextView.setVisibility(View.VISIBLE);
+        mTransTitleView.setVisibility(View.VISIBLE);
     }
 
     private void hidAllUIElements(){
         mSpinner.setVisibility(View.GONE);
         mButton.setVisibility(View.GONE);
         mTextView.setVisibility(View.GONE);
+        mTransTitleView.setVisibility(View.GONE);
+        mInfoTextView.setVisibility(View.GONE);
     }
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
