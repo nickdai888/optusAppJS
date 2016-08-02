@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OptusAppJson</string>
+    <string name="transport_title">Mode of Transport:</string>
+
+</resources>
