@@ -1,5 +1,6 @@
 package com.optus.optusappjson;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -64,8 +65,10 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-//                startActivity(intent);
+                Intent intentMap = new Intent(MainActivity.this, MapsActivity.class);
+                intentMap.putExtra("latitude", transBeans[choosedItemIndex].location.latitude);
+                intentMap.putExtra("longitude", transBeans[choosedItemIndex].location.longitude);
+                startActivity(intentMap);
             }
         });
         new TransportAsyncTask(myHandler).execute(URL);
