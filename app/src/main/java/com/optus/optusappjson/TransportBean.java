@@ -5,19 +5,19 @@ package com.optus.optusappjson;
  */
 
 public class TransportBean {
-    public int id;
-    public String name;
 
-    public Fromcentral fromcentral;
-    public Location location;
     public static class Fromcentral{
         String car;
         String train;
     }
 
     public static class Location{
-        float latitude;
-        float longitude;
+        double latitude;
+        double longitude;
     }
 
+    public int id;
+    public String name;
+    public Fromcentral fromcentral;
+    public Location location;
 }
