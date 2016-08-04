@@ -2,8 +2,17 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            storeFile file('/Users/nick/AndroidKeys/googleDemo.jks')
+        release {
+            storeFile file('./keystore/debug.keystore')
+            keyAlias "debug.keystore"
+            keyPassword "37213721"
+            storePassword "37213721"
+        }
+        debug{
+            storeFile file('./keystore/release.keystore')
+            keyAlias "release.keystore"
+            keyPassword "37213721"
+            storePassword "37213721"
         }
     }
     compileSdkVersion 23
@@ -19,9 +28,12 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+            signingConfig signingConfigs.debug
         }
     }
 }
