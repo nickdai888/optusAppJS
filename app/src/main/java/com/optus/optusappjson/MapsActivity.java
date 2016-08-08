@@ -50,11 +50,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-
-        Log.i("MapsActivity", "lantitude is: " + latitude + " longtitude is:" + longitude);
+//        Log.i("MapsActivity", "lantitude is: " + latitude + " longtitude is:" + longitude);
+        String title = this.getString(R.string.location_title);
         LatLng carmlocation = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(carmlocation).title("Marker in Sydney"));
+        mMap.addMarker(new MarkerOptions().position(carmlocation).title(title));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling

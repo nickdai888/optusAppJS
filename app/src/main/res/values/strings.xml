@@ -2,5 +2,7 @@
     <string name="app_name">OptusAppJson</string>
     <string name="transport_title">Mode of Transport:</string>
     <string name="title_activity_maps">Map</string>
-
+    <string name = "optus_url">http://express-it.optusnet.com.au/sample.json</string>string>
+    <string name="conn_error_msg">Connection Error!</string>
+    <string name= "location_title"> Marker in Sydney</string>
 </resources>

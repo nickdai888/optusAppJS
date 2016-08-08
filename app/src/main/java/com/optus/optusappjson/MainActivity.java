@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static String URL = "http://express-it.optusnet.com.au/sample.json";
+    private static String URL;
     private Handler myHandler;
     //get from server
     private TransportBean transBeans[] = null;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mStatus = CurrentStatus.FETCHING_JSON;
+        URL = getString(R.string.optus_url);
 
         myHandler = new Handler() {
             public void handleMessage(Message msg) {
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(){
+        String errMsg = this.getString(R.string.conn_error_msg);
         switch(mStatus){
             case GET_JSON_SUCCESSFUL:
                 showTransUIElements();
@@ -82,14 +84,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case  OTHER_ERROR:
             case NETWORK_UNREACHABLE:
-                hidAllUIElements();
-                mInfoTextView.setVisibility(View.VISIBLE);
-                mInfoTextView.setText("Connection Error!");
-                break;
             case FETCHING_JSON:
                 hidAllUIElements();
                 mInfoTextView.setVisibility(View.VISIBLE);
-                mInfoTextView.setText("Connecting Service!");
+                mInfoTextView.setText(errMsg);
                 break;
         }
     }
