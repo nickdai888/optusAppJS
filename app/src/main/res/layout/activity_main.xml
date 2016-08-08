@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+    <data>
+        <import type="com.optus.optusappjson.TransUserData" />
+        <import type="com.optus.optusappjson.TransEventHandler" />
+        <import type="android.view.View"/>
+        <variable
+            name="user"
+            type="TransUserData"/>
+        <variable
+            name="handlers"
+            type="TransEventHandler" />
+        <variable
+            name="spinnerAdapter"
+            type="android.widget.ArrayAdapter" />
+    </data>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical" >
+
+<LinearLayout android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:visibility="@{!user.errState ? View.VISIBLE : View.GONE}"
               android:orientation="vertical" >
 <Spinner
     android:id="@+id/spinner"
@@ -11,13 +32,15 @@
     android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="21dp"
     tools:layout_editor_absoluteX="-18dp"
+    android:spinnerMode="dropdown"
+    android:drawSelectorOnTop="true"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:layout_marginTop="20dp"
     />
 
     <TextView
-        android:text="@string/transport_title"
+        android:text="@{user.transTitleText}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/transportTitle"
@@ -29,7 +52,7 @@
         android:layout_marginRight="20dp"/>
 
     <TextView
-        android:text=""
+        android:text="@{user.transInfoText}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/transportInfo"
@@ -39,23 +62,25 @@
         android:layout_marginRight="20dp"/>
 
     <Button
-        android:text="Navigate"
+        android:text="@{user.navigationButtonName}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button"
+        android:onClick="@{handlers.handleNavClick}"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="100dp"/>
+</LinearLayout>
 
     <TextView
-        android:text=""
+        android:text="@{user.errMessage}"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/errText"
+        android:layout_gravity="center_horizontal"
         android:padding="5dp"
-        android:visibility="gone"
-        android:gravity="center"
+        android:visibility="@{user.errState ? View.VISIBLE : View.GONE}"
         android:layout_marginTop="50dp"/>
-
-
 </LinearLayout>
+
+</layout>

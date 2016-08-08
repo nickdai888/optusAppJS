@@ -5,4 +5,5 @@
     <string name = "optus_url">http://express-it.optusnet.com.au/sample.json</string>string>
     <string name="conn_error_msg">Connection Error!</string>
     <string name= "location_title"> Marker in Sydney</string>
+    <string name= "navi_button_name"> Navigation</string>
 </resources>

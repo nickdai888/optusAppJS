@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    dataBinding {
+        enabled = true
+    }
     signingConfigs {
         release {
             storeFile file('./keystore/debug.keystore')
@@ -47,4 +50,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.android.gms:play-services-maps:9.4.0'
     testCompile 'junit:junit:4.12'
+
 }
